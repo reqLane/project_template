@@ -1,3 +1,4 @@
+import pandas
 
 
 def console_input():
@@ -7,7 +8,8 @@ def console_input():
     Returns:
         str. The input user provided.
     """
-    pass
+    user_input = input("Please enter your text: ")
+    return user_input
 
 
 def read_file_python(path_to_file):
@@ -21,12 +23,18 @@ def read_file_python(path_to_file):
     Returns:
         str. The content of the specified file.
     """
-    pass
+    try:
+        with open(path_to_file, 'r') as file:
+            file_content = file.read()
+            return file_content
+    except FileNotFoundError:
+        print(f"File \"{path_to_file}\" not found")
+        return None
 
 
 def read_file_pandas(path_to_file):
     """
-    Reads content of the specified file and returns it as a string.
+    Reads content of the specified csv file and returns it as text.
     Uses methods provided by pandas library.
 
     Args:
@@ -35,4 +43,9 @@ def read_file_pandas(path_to_file):
     Returns:
         str. The content of the specified file.
     """
-    pass
+    try:
+        data = pandas.read_csv(path_to_file)
+        return data.to_string()
+    except FileNotFoundError:
+        print(f"File \"{path_to_file}\" not found")
+        return None
